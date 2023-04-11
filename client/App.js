@@ -1,12 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, Text, View } from 'react-native';
-import { addData2GoogleSheet } from './utils/addData2GoogleSheet';
 import { useEffect } from 'react';
+import axios from 'axios';
 
 function updateSheet(data){
   axios({
     method: 'post',
-    url: 'http://10.0.2.2:8000/add_data',
+    url: 'http://10.0.2.2:8080/add_data',
     data: JSON.stringify(data),
     headers: {
         "Content-Type": "application/json"
@@ -32,11 +32,11 @@ function updateSheet(data){
 }
 
 export default function App() {
-  <Button onPress={updateSheet(22)}></Button>
+  
   return (
     <View style={styles.container}>
       <Text>Open up App.js to start working on your app!</Text>
-      <Button onPress={addData2GoogleSheet(22)}>click to add data</Button>
+      <Button onPress={updateSheet(22)} title='Update sheet'>Update Sheet</Button>
       <StatusBar style="auto" />
     </View>
   );

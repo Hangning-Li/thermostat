@@ -44,5 +44,5 @@ app.post("/add_data", async (req, res) => {
 
     res.send("Successfully submitted! Thank you!");
 });
-dd
+
 app.listen(8080, (req, res) => console.log("running on 8080"));
