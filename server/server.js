@@ -1,9 +1,9 @@
 const express = require('express');
-const app = express()
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const { google } = require("googleapis");
 
+const exp = express();
 // allow CORS
 exp.use(cors({ origin: true }));
 // to support JSON-encoded bodies
@@ -14,7 +14,7 @@ exp.use(bodyParser.urlencoded({
 }));
 
 
-app.post("/add_data", async (req, res) => {
+exp.post("/add_data", async (req, res) => {
     try {
         // Authorize with Google
         const auth = new google.auth.GoogleAuth({
@@ -57,7 +57,7 @@ app.post("/add_data", async (req, res) => {
         res.status(500).send('error occured');
     }
 
-    // res.status(200).send("Successfully submitted! Thank you!");
+    res.status(200).send("Successfully submitted! Thank you!");
 });
 
-app.listen(8080, (req, res) => console.log("running on 8080"));
+exp.listen(8000, (req, res) => console.log("running on 8000"));

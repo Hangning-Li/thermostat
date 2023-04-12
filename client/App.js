@@ -1,13 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 import { useEffect } from 'react';
 import axios from 'axios';
 
 function updateSheet(data){
   axios({
     method: 'post',
-    url: 'http://localhost:8080/add_data',
-    data: JSON.stringify(data),
+    url: 'http://10.0.2.2:8000/add_data',
+    data: JSON.stringify({data : data}),
     headers: {
         "Content-Type": "application/json"
     }
@@ -36,7 +36,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text>Open up App.js to start working on your app!</Text>
-      <button onSubmit={updateSheet(22)}></button>
+      <Button onPress={()=> updateSheet(22)} title='update sheet'></Button>
       <StatusBar style="auto" />
     </View>
   );
