@@ -75,6 +75,50 @@ exp.get("/get_temp", async (req, res) => {
     res.status(200).send("success");
 });
 
+// get latest row data from google sheet
+exp.get("/get_latest_row", async (req, res) => {
+    try {
+        // Authorize with Google
+        const auth = new google.auth.GoogleAuth({
+            keyFile: 'credentials.json',
+            scopes: ['https://www.googleapis.com/auth/spreadsheets']
+        });
+        const authClient = await auth.getClient();
+
+        const sheets = google.sheets({
+            version: 'v4',
+            auth: authClient
+        });
+
+        // Set the spreadsheet ID and range
+        const spreadsheetId = '1xWPl2yj06fAG22O6Q3b2XwkTUEyIy5w4bsA30SX4Tuc';
+        const range = 'Sheet1!A1:Z';
+
+        // Define the value to add
+        const value = req.body.data;
+
+        // Create the update request
+        const request = {
+            spreadsheetId: spreadsheetId,
+            range: range
+        };
+
+        // Update the spreadsheet
+        const response = await sheets.spreadsheets.values.get(request);
+        // Get the values from the latest row
+        const values = response.data.values;
+        const latestRow = values[values.length - 1];
+
+        console.log(latestRow);
+
+    } catch (error) {
+        console.error(`Error getting data from spreadsheet: ${error}`);
+        res.status(500).send('error occured');
+    }
+
+    res.status(200).send("successfully retreived data from the latest row");
+});
+
 // add data to google sheet
 exp.post("/add_data", async (req, res) => {
     try {

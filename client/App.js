@@ -1,8 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { useEffect } from 'react';
-import { addData2GoogleSheet } from './utils/addData2GoogleSheet';
-import { getTemperature } from './utils/getTemperature';
+import { getLatestRow } from './utils/getLatestRow'
+// import { getTemperature } from './utils/getTemperature';
+
 import { v4 as uuid } from 'uuid';
 
 export default function App() {
@@ -12,8 +13,9 @@ export default function App() {
   
   return (
     <View style={styles.container}>
-      <Button onPress={()=> addData2GoogleSheet(data,userid)} title='update sheet'></Button>
-      <Button onPress={()=> getTemperature()} title='get temp'></Button>
+      {/* <Button onPress={()=> addData2GoogleSheet(data,userid)} title='update sheet'></Button> */}
+      {/* <Button onPress={()=> getTemperature()} title='get temp'></Button> */}
+      <Button onPress={()=> getLatestRow()} title='get latest row'></Button>
       <StatusBar style="auto" />
     </View>
   );
