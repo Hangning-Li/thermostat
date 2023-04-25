@@ -69,10 +69,10 @@ exp.get("/get_temp", async (req, res) => {
 
     } catch (error) {
         console.error(`Error retrieving temperature: ${error}`);
+        res.status(500).send('Error retrieving temperature')
     }
 
-    // res.status(200).send(`temperature: ${temperature}`);
-    res.status(200).send("success");
+    res.status(200).send(`temperature: ${temperature}`);
 });
 
 // get latest row data from google sheet
@@ -113,7 +113,7 @@ exp.get("/get_latest_row", async (req, res) => {
 
     } catch (error) {
         console.error(`Error getting data from spreadsheet: ${error}`);
-        res.status(500).send('error occured');
+        res.status(500).send('Error getting data from spreadsheet');
     }
 
     res.status(200).send("successfully retreived data from the latest row");
@@ -161,7 +161,7 @@ exp.post("/add_data", async (req, res) => {
         addData(req.body.data, req.body.userid);
     } catch (error) {
         console.error(`Error updating spreadsheet: ${error}`);
-        res.status(500).send('error occured');
+        res.status(500).send('Error updating spreadsheet');
     }
 
     res.status(200).send("Successfully submitted! Thank you!");
