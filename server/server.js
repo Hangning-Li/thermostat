@@ -91,11 +91,8 @@ exp.get("/get_latest_row", async (req, res) => {
         });
 
         // Set the spreadsheet ID and range
-        const spreadsheetId = '1xWPl2yj06fAG22O6Q3b2XwkTUEyIy5w4bsA30SX4Tuc';
+        const spreadsheetId = '10evHAFJ_PzWxU4UFP8M_1gEJ3iQJX-3cbbhmCyc4G58';
         const range = 'Sheet1!A1:Z';
-
-        // Define the value to add
-        const value = req.body.data;
 
         // Create the update request
         const request = {
@@ -135,7 +132,7 @@ exp.post("/add_data", async (req, res) => {
         });
 
         // Set the spreadsheet ID and range
-        const spreadsheetId = '1xWPl2yj06fAG22O6Q3b2XwkTUEyIy5w4bsA30SX4Tuc';
+        const spreadsheetId = '10evHAFJ_PzWxU4UFP8M_1gEJ3iQJX-3cbbhmCyc4G58';
         const range = 'A1';
 
         // Define the value to add
@@ -158,7 +155,7 @@ exp.post("/add_data", async (req, res) => {
         console.log(`${response.data.updatedCells} cells updated.`);
 
         // add data to firebase
-        addData(req.body.data, req.body.userid);
+        // addData(req.body.data, req.body.userid);
     } catch (error) {
         console.error(`Error updating spreadsheet: ${error}`);
         res.status(500).send('Error updating spreadsheet');
